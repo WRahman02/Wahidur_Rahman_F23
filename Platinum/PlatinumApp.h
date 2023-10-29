@@ -1,11 +1,12 @@
 #pragma once
 
 #include "Utilities.h"
+#include "GameWindow.h"
 
 namespace pl
 {
 	template <typename T>
-	class PLATINUM_API PlatinumApp
+	class PlatinumApp
 	{
 	public:
 		static void Init();
@@ -18,6 +19,7 @@ namespace pl
 	private:
 		PlatinumApp();
 		inline static PlatinumApp* sInstance{ nullptr };
+		GameWindow mWindow;
 		bool mShouldContinue{ true };
 	};
 };

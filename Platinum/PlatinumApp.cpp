@@ -21,9 +21,13 @@ namespace pl
 	template <typename T>
 	void pl::PlatinumApp<T>::Run()
 	{
+		mWindow.Create("Game_WA",1000, 800);
 		while (mShouldContinue)
 		{
 			onUpdate();
+
+			mWindow.SwapBuffers();
+			mWindow.PollEvents();
 		}
 	}
 	template <typename T>

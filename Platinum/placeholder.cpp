@@ -2,5 +2,5 @@
 
 void Hello()
 {
-	std::cout << "hello\n";
+	std::cout << "Hello\n";
 }
