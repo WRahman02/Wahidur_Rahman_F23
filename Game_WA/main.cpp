@@ -7,7 +7,11 @@ public:
 	virtual void onUpdate() override
 	{
 		std::cout << "Platinum running" << std::endl;
+		Draw(mUnit);
 	}
+private:
+	pl::Picture mPic{ "../Assets/images/test.png" };
+	pl::Unit mUnit{ "../Assets/images/test.png", 100, 200 };
 };
 
 
