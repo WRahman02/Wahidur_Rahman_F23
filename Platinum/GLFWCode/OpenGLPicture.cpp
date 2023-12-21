@@ -20,25 +20,38 @@ namespace pl
 
 		int nrChannels;
 		stbi_set_flip_vertically_on_load(true);
-		unsigned char* data = stbi_load(path.c_str(), &Width, &Height, &nrChannels, 0);
+		unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
+
 		if (data)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
+			GLenum error = glGetError();
+			if (error != GL_NO_ERROR)
+			{
+				// Log or print the error
+				PL_ERROR("OpenGL Error: {}", error);
+			}
 		}
 		else
 		{
 			PL_ERROR("FAILED TO LOAD PICTURE");
+			return;
 		}
+		
+		
 		stbi_image_free(data);
+		std::cout << &data << std::endl;
+		std::cout << height << std::endl;
+
 	}
 	int OpenGLPicture::GetWidth() const
 	{
-		return Width;
+		return width;
 	}
 	int OpenGLPicture::GetHeight() const
 	{
-		return Height;
+		return height;
 	}
 
 	void OpenGLPicture::Bind()

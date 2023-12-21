@@ -15,7 +15,7 @@ namespace pl
 		~OpenGLPicture();
 
 	private:
-		int Width, Height;
+		int width, height;
 		unsigned int mPictureProgram;
 		
 	};
