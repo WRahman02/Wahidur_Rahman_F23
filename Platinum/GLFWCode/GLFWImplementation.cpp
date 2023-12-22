@@ -1,7 +1,8 @@
-#include "pch.h"
-#include "GLFWImplementation.h"
-#include "GLFW/glfw3.h"
-#include "Utilities.h"
+#include"../pch.h"
+#include"../Utilities.h" 
+
+#include"GLFWImplementation.h"
+
 namespace pl
 {
 	GLFWImplementation::GLFWImplementation()
@@ -11,15 +12,18 @@ namespace pl
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	}
+
 	void GLFWImplementation::Create(const std::string& name, int width, int height)
 	{
-		mWindow = glfwCreateWindow(width, height, "Game_WA", NULL, NULL);
+		mWindow = glfwCreateWindow(width, height, "Game WA", NULL, NULL);
+
 		if (mWindow == NULL)
 		{
 			PL_ERROR("Failed to create GLFW window");
 			glfwTerminate();
 			return;
 		}
+
 		glfwMakeContextCurrent(mWindow);
 
 		glfwSetWindowUserPointer(mWindow, &mCallbacks);
@@ -28,21 +32,25 @@ namespace pl
 			if (action == GLFW_PRESS)
 			{
 				Callbacks* callbacks{ (Callbacks*)glfwGetWindowUserPointer(window) };
+
 				KeyPressed e{ keycode };
 				callbacks->keyPressedFunc(e);
 			}
 			else if (action == GLFW_RELEASE)
 			{
 				Callbacks* callbacks{ (Callbacks*)glfwGetWindowUserPointer(window) };
+
 				KeyReleased e{ keycode };
 				callbacks->keyReleasedFunc(e);
 			}
 			});
+
 		glfwSetWindowCloseCallback(mWindow, [](GLFWwindow* window) {
 			Callbacks* callbacks{ (Callbacks*)glfwGetWindowUserPointer(window) };
 			callbacks->windowCloseFunc();
 			});
 	}
+
 
 	int GLFWImplementation::GetHeight() const
 	{
@@ -51,6 +59,7 @@ namespace pl
 		return height;
 	}
 
+
 	int GLFWImplementation::GetWidth() const
 	{
 		int width{ 0 }, height{ 0 };
@@ -58,30 +67,30 @@ namespace pl
 		return width;
 	}
 
+	void GLFWImplementation::PollEvents()
+	{
+		glfwPollEvents();
+	}
+
 	void GLFWImplementation::SwapBuffers()
 	{
 		glfwSwapBuffers(mWindow);
 	}
 
-	void GLFWImplementation::PollEvents()
+	void GLFWImplementation::SetKeyPressedCallback(std::function<void(const KeyPressed&)> callbackFunc)
 	{
-		glfwPollEvents();
-	}
-	void GLFWImplementation::SetKeyPressedCallback(std::function<void(const KeyPressed&)> callbackfunc)
-	{
-		mCallbacks.keyPressedFunc = callbackfunc;
+		mCallbacks.keyPressedFunc = callbackFunc;
 	}
 
-	void GLFWImplementation::SetKeyReleasedCallback(std::function<void(const KeyReleased&)> callbackfunc)
+	void GLFWImplementation::SetKeyReleasedCallback(std::function<void(const KeyReleased&)> callbackFunc)
 	{
-		mCallbacks.keyReleasedFunc = callbackfunc;
+		mCallbacks.keyReleasedFunc = callbackFunc;
+
 	}
 
 	void GLFWImplementation::SetWindowCloseCallback(std::function<void()>& callbackFunc)
 	{
 		mCallbacks.windowCloseFunc = callbackFunc;
 	}
-
-	
 
 }

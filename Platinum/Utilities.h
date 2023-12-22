@@ -1,31 +1,34 @@
 #pragma once
 
 #if PL_DEBUG == 2
-	#define PL_ERROR(x) std::cout << x << std::endl;
-	#define PL_LOG(x) std::cout << x << std::endl;
+#define PL_ERROR(X) std::cout << X << std::endl;
+#define PL_LOG(X) std::cout << X << std::endl;
 
 #elif PL_DEBUG == 1
-	#define PL_ERROR(x) std::cout << x << std::endl;
-	#define PL_LOG(x)
-#else
-	#define PL_ERROR(x)
-	#define PL_LOG(x)
+#define PL_ERROR(X) std::cout << X << std::endl;
+#define PL_LOG(X)
+
+#else 
+#define PL_ERROR(X)
+#define PL_LOG(X) 
 #endif
 
 #ifdef PLATINUM_MSCPP
-	#ifdef PLATINUM_LIB
-		#define PLATINUM_API __declspec(dllexport)
-	#else
-		#define PLATINUM_API __declspec(dllimport)
-	#endif
+
+#ifdef PLATINUM_LIB
+#define PLATINUM_API __declspec(dllexport)
 #else
-	#define PLATINUM_API
+#define PLATINUM_API __declspec(dllimport)
 #endif
 
-#define PLATINUM_APPLICATION_START(ClassName)\
+#else
+#define PLATINUM_API
+#endif
+
+#define PLATINUM_APPLICATION_START(ClassName) \
 int main()\
 {\
-	ClassName::Init();\
-	ClassName::RunInterface();\
-	return (0);\
+    ClassName::Init();\
+    ClassName::RunInterface();\
+    return(0);\
 }

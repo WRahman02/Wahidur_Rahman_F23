@@ -3,69 +3,78 @@
 
 namespace pl
 {
-    Unit::Unit(const std::string& image, int x, int y) :
-        mImage(image), mXPosition(x), mYPosition(y)
-    {
-    }
 
-    Unit::Unit(std::string&& image, int x, int y) :
-        mImage(std::move(image)), mXPosition(x), mYPosition(y)
-    {
-    }
+	Unit::Unit(const std::string& image, int x, int y) : mImage(image), mXPosition(x), mYPosition(y), mDirection(Direction::forward)
+	{
+	}
 
-    int Unit::GetWidth() const
-    {
-        return mImage.GetWidth();
-    }
+	Unit::Unit(std::string&& image, int x, int y) : mImage(image), mXPosition(x), mYPosition(y), mDirection(Direction::forward)
+	{
+	}
 
-    int Unit::GetHeight() const
-    {
-        return mImage.GetHeight();
-    }
+	int Unit::GetWidth() const
+	{
+		return mImage.GetWidth();
+	}
 
-    int Unit::GetXCoord() const
-    {
-        return mXPosition;
-    }
+	int Unit::GetHeight() const
+	{
+		return mImage.GetHeight();
+	}
 
-    int Unit::GetYCoord() const
-    {
-        return mYPosition;
-    }
+	int Unit::GetXCoord() const
+	{
+		return mXPosition;
+	}
 
-    void Unit::SetCoords(int x, int y)
-    {
-        mXPosition = x;
-        mYPosition = y;
-    }
+	int Unit::GetYCoord() const
+	{
+		return mYPosition;
+	}
 
-    void Unit::UpdateXCoords(int amount)
-    {
-        mXPosition += amount;
-    }
+	void Unit::SetCoords(int x, int y)
+	{
+		mXPosition = x;
+		mYPosition = y;
+	}
 
-    void Unit::UpdateYCoords(int amount)
-    {
-        mYPosition += amount;
-    }
+	void Unit::UpdateXCoord(int amount)
+	{
+		mXPosition += amount;		
+	}
 
+	void Unit::UpdateYCoord(int amount)
+	{
+		mYPosition += amount;
+	}
 
-    bool UnitsOverlap(const Unit& a, const Unit& b)
-    {
-        int left_a{ a.mXPosition };
-        int right_a{ a.mXPosition + a.mImage.GetWidth() };
-        int left_b{ b.mXPosition };
-        int right_b{ b.mXPosition + b.mImage.GetWidth() };
+	Unit::Direction Unit::GetDirection() const
+	{
+		return mDirection;
+	}
 
-        bool x_intersection{ (left_a <= left_b and left_b <= right_a) or (left_b <= left_a and left_a <= right_b) };
+	void Unit::SetDirection(Unit::Direction direction)
+	{
+		mDirection = direction;
+	}
+	
+	bool UnitsOverlap(const Unit& a, const Unit& b)
+	{
+		int aLeft{ a.mXPosition };
+		int aRight{ a.mXPosition + a.mImage.GetWidth() };
+		int aBottom{ a.mYPosition };
+		int aTop{ a.mYPosition + a.mImage.GetHeight() };
 
-        int bot_a{ a.mYPosition };
-        int top_a{ a.mYPosition + a.mImage.GetHeight() };
-        int bot_b{ b.mYPosition };
-        int top_b{ b.mYPosition + b.mImage.GetHeight() };
+		int bLeft{ b.mXPosition };
+		int bRight{ b.mXPosition + b.mImage.GetWidth() };
+		int bBottom{ b.mXPosition };
+		int bTop{ b.mYPosition + b.mImage.GetHeight() };
 
-        bool y_intersection{ (bot_a <= bot_b and bot_b <= top_a) or (bot_b <= bot_a and bot_a <= top_b) };
+		bool xOverlap{ (aLeft <= bLeft and bLeft <= aRight) || (bLeft <= aLeft and aLeft <= bRight) };
+		bool yOverlap{ (aBottom <= bBottom and bBottom <= aTop) || (bBottom <= aBottom and aBottom <= bTop) };
 
-        return x_intersection and y_intersection;
-    }
+		return xOverlap and yOverlap;
+	}	
 }
+
+

@@ -1,22 +1,28 @@
 #pragma once
 
 #include "../pch.h"
-#include "Picture.h"
+#include "../PictureImplementation.h"
+
 namespace pl
 {
-	class OpenGLPicture : public PictureImplementation
-	{
-	public: 
-		OpenGLPicture(const std::string& path);
+    class OpenGLPicture : public PictureImplementation
+    {
+    public:
 
-		virtual int GetWidth() const override;
-		virtual int GetHeight() const override;
-		virtual void Bind() override;
-		~OpenGLPicture();
+        OpenGLPicture(const std::string& filePath);
 
-	private:
-		int width, height;
-		unsigned int mPictureProgram;
-		
-	};
+        virtual int GetWidth() const override;
+        virtual int GetHeight() const override;
+
+        virtual void Bind() override;
+
+        ~OpenGLPicture();
+
+    private:
+        int mWidth;
+        int mHeight;
+
+        unsigned int mPictureProgram;
+
+    };
 }

@@ -17,7 +17,13 @@ endif()
 
 
 add_subdirectory(glfw)
+add_subdirectory(glad)
+add_subdirectory(stbi)
 add_subdirectory(Platinum)
 add_subdirectory(Game_WA)
 
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT Game_WA)
+
+file(COPY Assets DESTINATION ${PROJECT_BINARY_DIR})
+file(COPY Assets DESTINATION ${PROJECT_BINARY_DIR}/Debug)
+file(COPY Assets DESTINATION ${PROJECT_BINARY_DIR}/Release)

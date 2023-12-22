@@ -1,42 +1,33 @@
 #include "pch.h"
 #include "Picture.h"
 #include "GLFWCode/OpenGLPicture.h"
-#include "Utilities.h"
-
 
 namespace pl
 {
-    Picture::Picture(const std::string& pic)
-    {
+	Picture::Picture(const std::string& pathToPicture)
+	{
 #ifdef PLATINUM_MSCPP
-        mImplementation = std::unique_ptr<PictureImplementation>{ new OpenGLPicture(pic) };
+		mImplementation = std::unique_ptr<PictureImplementation>{ new OpenGLPicture(pathToPicture) };
 #elif PLATINUM_APPLE
-        mImplementation = std::unique_ptr<PictureImplementation>{ new OpenGLPicture(pic) };
+		mImplementation = std::unique_ptr<PictureImplementation>{ new OpenGLPicture(pathToPicture) };
 #elif PLATINUM_LINUX
-        mImplementation = std::unique_ptr<PictureImplementation>{ new OpenGLPicture(pic) };
+		mImplementation = std::unique_ptr<PictureImplementation>{ new OpenGLPicture(pathToPicture) };
 #endif
-    }
+	}
 
-    /*
-    Picture::~Picture()
-    {
-        mImplementation->~PictureImplementation();
-    }
-    */
-    int Picture::GetHeight() const
-    {
-        return mImplementation->GetHeight();
-    }
+	int Picture::GetWidth() const
+	{
+		return mImplementation->GetWidth();
+	}
 
-    int Picture::GetWidth() const
-    {
-        return mImplementation->GetWidth();
-    }
+	int Picture::GetHeight() const
+	{
+		return mImplementation->GetHeight();
+	}
 
-    void Picture::Bind()
-    {
-        mImplementation->Bind();
-    }
-
+	void Picture::Bind()
+	{
+		mImplementation->Bind();
+	}
 
 }

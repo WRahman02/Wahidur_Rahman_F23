@@ -1,11 +1,11 @@
-#include "pch.h"
+#include"../pch.h"
 
-#include "OpenGLRenderer.h"
-
-#include "../glad/include/glad/glad.h"
-#include "../glfw/include/GLFW/glfw3.h"
-
+#include"OpenGLRenderer.h"
 #include "../Utilities.h"
+
+#include"../glad/include/glad/glad.h"
+#include"../glfw/include/GLFW/glfw3.h"
+
 namespace pl
 {
 	void OpenGLRenderer::Init()
@@ -15,9 +15,11 @@ namespace pl
 			PL_ERROR("Failed to initialize GLAD");
 			return;
 		}
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
+
 	void OpenGLRenderer::Draw(int x, int y, Picture& pic)
 	{
 		float vertices[] = {
@@ -27,7 +29,8 @@ namespace pl
 			(float)x + pic.GetWidth(), (float)y + pic.GetHeight(), 1.0f, 1.0f
 
 		};
-		unsigned int indicies[] = {
+
+		unsigned int indices[] = {
 			0, 1, 2,
 			1, 2, 3
 		};
@@ -44,7 +47,7 @@ namespace pl
 		unsigned int EBO;
 		glGenBuffers(1, &EBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicies), indicies, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
@@ -61,9 +64,10 @@ namespace pl
 		glDeleteBuffers(1, &EBO);
 		glDeleteVertexArrays(1, &VAO);
 	}
+
 	void OpenGLRenderer::Clear()
 	{
-		glClearColor(0.9f, 0.2f, 0.1f, 1.0f);
+		glClearColor(0.6f, 0.4f, 0.2f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 }

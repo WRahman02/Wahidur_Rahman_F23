@@ -1,0 +1,8 @@
+Unique features:
+- This is a game where you play as Kirby, and can pick up a png of a cake. Once you pick up the cake you're free to move around with that cake.
+
+- Changes picture depending on direction
+	- if you move left, the character looks left and the same applies to right
+
+- Ability to pick up and put down cake
+	- What it does is when you press the SPACE key when colliding with the cake, You can 	now hold the cake and move it to a different location and put it down in the new 	location

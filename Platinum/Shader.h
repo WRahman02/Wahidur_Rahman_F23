@@ -1,9 +1,9 @@
 #pragma once
 
-#include "pch.h"
-#include "Utilities.h"
+#include"pch.h"
+#include"Utilities.h"
 
-#include "ShaderImplementation.h"
+#include"ShaderImplementation.h"
 
 namespace pl
 {
@@ -17,6 +17,6 @@ namespace pl
 
 	private:
 		std::unique_ptr<ShaderImplementation> mImplementation;
-
 	};
 }
+

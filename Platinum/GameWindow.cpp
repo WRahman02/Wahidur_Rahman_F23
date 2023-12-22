@@ -1,6 +1,8 @@
-#include "pch.h"
-#include "GameWindow.h"
-#include "GLFWCode/GLFWImplementation.h"
+#include"pch.h"
+
+#include"GameWindow.h"
+#include"GLFWCode/GLFWImplementation.h"
+
 namespace pl
 {
 	GameWindow::GameWindow()
@@ -11,9 +13,7 @@ namespace pl
 		mImplementation = std::unique_ptr<WindowImplementation>{ new GLFWImplementation };
 #elif PLATINUM_LINUX
 		mImplementation = std::unique_ptr<WindowImplementation>{ new GLFWImplementation };
-
 #endif
-
 	}
 	void GameWindow::Create(const std::string& name, int width, int height)
 	{
@@ -35,16 +35,18 @@ namespace pl
 	{
 		mImplementation->PollEvents();
 	}
-	void GameWindow::SetKeyPressedCallback(std::function<void(const KeyPressed&)> callbackFunc)
+	void GameWindow::SetKeyPressedCallback(std::function<void(const KeyPressed&)>& callbackFunc)
 	{
 		mImplementation->SetKeyPressedCallback(callbackFunc);
 	}
-	void GameWindow::SetKeyReleasedCallback(std::function<void(const KeyReleased&)> callbackFunc)
+	void GameWindow::SetKeyReleasedCallback(std::function<void(const KeyReleased&)>& callbackFunc)
 	{
 		mImplementation->SetKeyReleasedCallback(callbackFunc);
+
 	}
 	void GameWindow::SetWindowCloseCallback(std::function<void()>& callbackFunc)
 	{
 		mImplementation->SetWindowCloseCallback(callbackFunc);
 	}
+
 }

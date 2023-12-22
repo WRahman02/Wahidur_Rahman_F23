@@ -1,20 +1,24 @@
 #include "pch.h"
-#include "Events.h"
+#include"Events.h"
 
 namespace pl
 {
 	KeyPressed::KeyPressed(int kCode) : mKeyCode(kCode)
 	{
+
 	}
-	int KeyPressed::getGetKeyCode() const
+
+	int KeyPressed::GetKeyCode() const
 	{
 		return mKeyCode;
 	}
-	KeyReleased::KeyReleased(int kCode): mKeyCode(kCode)
+
+	KeyReleased::KeyReleased(int kCode) : mKeyCode(kCode)
 	{
+
 	}
 
-	int KeyReleased::getKeyCode() const
+	int KeyReleased::GetKeyCode() const
 	{
 		return mKeyCode;
 	}

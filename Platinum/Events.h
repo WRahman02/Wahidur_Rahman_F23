@@ -2,29 +2,29 @@
 
 #include "Utilities.h"
 
-namespace pl
-{
+namespace pl {
 	class PLATINUM_API KeyPressed
 	{
 	public:
 		KeyPressed(int kCode);
 
-		int getGetKeyCode() const;
-
+		int GetKeyCode() const;
 	private:
 		int mKeyCode;
+
 	};
 
 	class PLATINUM_API KeyReleased
 	{
 	public:
 		KeyReleased(int kCode);
-		int getKeyCode() const;
+
+		int GetKeyCode() const;
 	private:
 		int mKeyCode;
-	};
-	class PLATINUM_API WindowClosed
-	{
 
 	};
+
+	class PLATINUM_API WindowClosed
+	{};
 }

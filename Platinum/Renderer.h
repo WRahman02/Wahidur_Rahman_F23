@@ -1,10 +1,12 @@
 #pragma once
 
-#include "pch.h"
-#include "Utilities.h"
-#include "RendererImplementation.h"
-#include "Shader.h"
-#include "Picture.h"
+#include"pch.h"
+#include"Utilities.h"
+#include"RendererImplementation.h"
+#include"Shader.h"
+#include"Picture.h"
+
+
 namespace pl
 {
 	class PLATINUM_API Renderer
@@ -14,7 +16,10 @@ namespace pl
 		void Init();
 		void Draw(int x, int y, Picture& pic);
 		void Clear();
+
 	private:
 		std::unique_ptr<RendererImplementation> mImplementation;
 	};
+
+
 }
